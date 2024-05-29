@@ -1,21 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-const Step3 = ({ formData, setFormData, handleNextStep, handlePreviousStep }) => {
+const Step3 = ({
+  formData,
+  setFormData,
+  handleNextStep,
+  handlePreviousStep,
+}) => {
   const [errors, setErrors] = useState({});
 
   const validate = () => {
     const newErrors = {};
     if (!formData.username.trim() || formData.username.length < 3) {
-      newErrors.username = 'Nombre de usuario es obligatorio y debe tener al menos 3 caracteres';
+      newErrors.username =
+        "Nombre de usuario es obligatorio y debe tener al menos 3 caracteres";
     }
-    if (!formData.password.match(/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/)) {
-      newErrors.password = 'Contraseña debe tener al menos 8 caracteres, una letra mayúscula, un número y un carácter especial';
+    if (
+      !formData.password.match(/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/)
+    ) {
+      newErrors.password =
+        "Contraseña debe tener al menos 8 caracteres, una letra mayúscula, un número y un carácter especial";
     }
     if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Las contraseñas no coinciden';
+      newErrors.confirmPassword = "Las contraseñas no coinciden";
     }
     if (!formData.userProfile) {
-      newErrors.userProfile = 'Perfil de usuario es obligatorio';
+      newErrors.userProfile = "Perfil de usuario es obligatorio";
     }
     return newErrors;
   };
@@ -37,7 +46,9 @@ const Step3 = ({ formData, setFormData, handleNextStep, handlePreviousStep }) =>
         <input
           type="text"
           value={formData.username}
-          onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+          onChange={(e) =>
+            setFormData({ ...formData, username: e.target.value })
+          }
           className="w-full p-2 border border-gray-300 rounded-md"
         />
         {errors.username && <p className="text-red-500">{errors.username}</p>}
@@ -47,7 +58,9 @@ const Step3 = ({ formData, setFormData, handleNextStep, handlePreviousStep }) =>
         <input
           type="password"
           value={formData.password}
-          onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+          onChange={(e) =>
+            setFormData({ ...formData, password: e.target.value })
+          }
           className="w-full p-2 border border-gray-300 rounded-md"
         />
         {errors.password && <p className="text-red-500">{errors.password}</p>}
@@ -57,10 +70,14 @@ const Step3 = ({ formData, setFormData, handleNextStep, handlePreviousStep }) =>
         <input
           type="password"
           value={formData.confirmPassword}
-          onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+          onChange={(e) =>
+            setFormData({ ...formData, confirmPassword: e.target.value })
+          }
           className="w-full p-2 border border-gray-300 rounded-md"
         />
-        {errors.confirmPassword && <p className="text-red-500">{errors.confirmPassword}</p>}
+        {errors.confirmPassword && (
+          <p className="text-red-500">{errors.confirmPassword}</p>
+        )}
       </div>
       <div className="mb-4">
         <label className="block mb-1">Perfil de Usuario:</label>
@@ -69,8 +86,10 @@ const Step3 = ({ formData, setFormData, handleNextStep, handlePreviousStep }) =>
             type="radio"
             name="userProfile"
             value="Personal"
-            checked={formData.userProfile === 'Personal'}
-            onChange={(e) => setFormData({ ...formData, userProfile: e.target.value })}
+            checked={formData.userProfile === "Personal"}
+            onChange={(e) =>
+              setFormData({ ...formData, userProfile: e.target.value })
+            }
             className="mr-2"
           />
           <label className="mr-4">Personal</label>
@@ -78,17 +97,31 @@ const Step3 = ({ formData, setFormData, handleNextStep, handlePreviousStep }) =>
             type="radio"
             name="userProfile"
             value="Business"
-            checked={formData.userProfile === 'Business'}
-            onChange={(e) => setFormData({ ...formData, userProfile: e.target.value })}
+            checked={formData.userProfile === "Business"}
+            onChange={(e) =>
+              setFormData({ ...formData, userProfile: e.target.value })
+            }
             className="mr-2"
           />
           <label>Negocios</label>
         </div>
-        {errors.userProfile && <p className="text-red-500">{errors.userProfile}</p>}
+        {errors.userProfile && (
+          <p className="text-red-500">{errors.userProfile}</p>
+        )}
       </div>
       <div className="flex justify-between mt-4">
-        <button onClick={handlePreviousStep} className="p-2 bg-gray-500 text-white rounded">Anterior</button>
-        <button onClick={handleNext} className="p-2 bg-blue-500 text-white rounded">Siguiente</button>
+        <button
+          onClick={handlePreviousStep}
+          className="p-2 bg-gray-500 text-white rounded"
+        >
+          Anterior
+        </button>
+        <button
+          onClick={handleNext}
+          className="p-2 bg-blue-500 text-white rounded"
+        >
+          Siguiente
+        </button>
       </div>
     </div>
   );

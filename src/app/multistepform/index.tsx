@@ -1,34 +1,34 @@
 "use client";
 
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation'; // Cambia 'next/router' a 'next/navigation'
-import Step1 from '../components/steps/Step1';
-import Step2 from '../components/steps/Step2';
-import Step3 from '../components/steps/Step3';
-import Step4A from '../components/steps/Step4A';
-import Step4B from '../components/steps/Step4B';
-import Step5 from '../components/steps/Step5';
+import React, { useState } from "react";
+import { useRouter } from "next/navigation"; // Cambia 'next/router' a 'next/navigation'
+import Step1 from "../components/steps/Step1";
+import Step2 from "../components/steps/Step2";
+import Step3 from "../components/steps/Step3";
+import Step4A from "../components/steps/Step4A";
+import Step4B from "../components/steps/Step4B";
+import Step5 from "../components/steps/Step5";
 
 const MultiStepForm = () => {
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    phoneNumber: '',
-    streetAddress: '',
-    city: '',
-    postalCode: '',
-    country: '',
-    username: '',
-    password: '',
-    confirmPassword: '',
-    userProfile: '',
-    dateOfBirth: '',
-    gender: '',
-    companyName: '',
-    companySize: '',
-    roleInCompany: '',
+    fullName: "",
+    email: "",
+    phoneNumber: "",
+    streetAddress: "",
+    city: "",
+    postalCode: "",
+    country: "",
+    username: "",
+    password: "",
+    confirmPassword: "",
+    userProfile: "",
+    dateOfBirth: "",
+    gender: "",
+    companyName: "",
+    companySize: "",
+    roleInCompany: "",
     receiveNotifications: false,
-    referralSource: '',
+    referralSource: "",
     termsAccepted: false,
   });
   const [step, setStep] = useState(1);
@@ -43,27 +43,28 @@ const MultiStepForm = () => {
   };
 
   const handleSubmit = async () => {
-    const url = formData.userProfile === 'Personal'
-      ? 'https://run.mocky.io/v3/892bc38b-c7e2-4432-a478-2eac4df57942'
-      : 'https://run.mocky.io/v3/e1724715-51d4-4ed2-b20f-cd3c59659e47';
+    const url =
+      formData.userProfile === "Personal"
+        ? "https://run.mocky.io/v3/892bc38b-c7e2-4432-a478-2eac4df57942"
+        : "https://run.mocky.io/v3/e1724715-51d4-4ed2-b20f-cd3c59659e47";
 
     try {
       const response = await fetch(url, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
 
       if (response.ok) {
-        sessionStorage.setItem('formData', JSON.stringify(formData));
-        router.push('/summary');
+        sessionStorage.setItem("formData", JSON.stringify(formData));
+        router.push("/summary");
       } else {
-        alert('Error al enviar el formulario');
+        alert("Error al enviar el formulario");
       }
     } catch (error) {
-      alert('Error al enviar el formulario');
+      alert("Error al enviar el formulario");
     }
   };
 
@@ -96,7 +97,7 @@ const MultiStepForm = () => {
           />
         );
       case 4:
-        return formData.userProfile === 'Personal' ? (
+        return formData.userProfile === "Personal" ? (
           <Step4A
             formData={formData}
             setFormData={setFormData}
@@ -126,11 +127,11 @@ const MultiStepForm = () => {
   };
 
   const stepTitles = [
-    'Información Personal',
-    'Dirección',
-    'Cuenta',
-    'Información de Negocios',
-    'Preferencias',
+    "Información Personal",
+    "Dirección",
+    "Cuenta",
+    "Información de Negocios",
+    "Preferencias",
   ];
 
   const handleStepClick = (index: number) => {
@@ -145,7 +146,9 @@ const MultiStepForm = () => {
             key={index}
             onClick={() => handleStepClick(index)}
             className={`cursor-pointer px-4 py-2 text-sm font-medium ${
-              index + 1 === step ? 'text-blue-500 border-b-2 border-blue-500' : ''
+              index + 1 === step
+                ? "text-blue-500 border-b-2 border-blue-500"
+                : ""
             }`}
           >
             {title}

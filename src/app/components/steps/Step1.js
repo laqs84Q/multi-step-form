@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const Step1 = ({ formData, setFormData, handleNextStep }) => {
   const [errors, setErrors] = useState({});
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.fullName.trim() || formData.fullName.split(' ').length < 2) {
-      newErrors.fullName = 'Nombre completo es obligatorio y debe tener al menos 2 palabras';
+    if (!formData.fullName.trim() || formData.fullName.split(" ").length < 2) {
+      newErrors.fullName =
+        "Nombre completo es obligatorio y debe tener al menos 2 palabras";
     }
     if (!formData.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-      newErrors.email = 'Correo electrónico no es válido';
+      newErrors.email = "Correo electrónico no es válido";
     }
     if (!formData.phoneNumber.match(/^\d{10}$/)) {
-      newErrors.phoneNumber = 'Número de teléfono no es válido';
+      newErrors.phoneNumber = "Número de teléfono no es válido";
     }
     return newErrors;
   };
@@ -34,10 +35,14 @@ const Step1 = ({ formData, setFormData, handleNextStep }) => {
         <input
           type="text"
           value={formData.fullName}
-          onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+          onChange={(e) =>
+            setFormData({ ...formData, fullName: e.target.value })
+          }
           className="w-full p-2 border border-gray-300 rounded-md"
         />
-        {errors.fullName && <p className="text-red-500 mt-1">{errors.fullName}</p>}
+        {errors.fullName && (
+          <p className="text-red-500 mt-1">{errors.fullName}</p>
+        )}
       </div>
       <div className="mb-4">
         <label className="block mb-1">Correo Electrónico:</label>
@@ -54,12 +59,21 @@ const Step1 = ({ formData, setFormData, handleNextStep }) => {
         <input
           type="tel"
           value={formData.phoneNumber}
-          onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
+          onChange={(e) =>
+            setFormData({ ...formData, phoneNumber: e.target.value })
+          }
           className="w-full p-2 border border-gray-300 rounded-md"
         />
-        {errors.phoneNumber && <p className="text-red-500 mt-1">{errors.phoneNumber}</p>}
+        {errors.phoneNumber && (
+          <p className="text-red-500 mt-1">{errors.phoneNumber}</p>
+        )}
       </div>
-      <button onClick={handleNext} className="bg-blue-500 text-white px-4 py-2 rounded-md">Siguiente</button>
+      <button
+        onClick={handleNext}
+        className="bg-blue-500 text-white px-4 py-2 rounded-md"
+      >
+        Siguiente
+      </button>
     </div>
   );
 };
