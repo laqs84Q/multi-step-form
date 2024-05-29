@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { FormData } from "../shared/types";
+import Modal from "../components/Modal";
 
 // Define el tipo para los datos transformados
 type TransformedData = {
@@ -36,6 +37,7 @@ type TransformedData = {
 const Summary = () => {
   const [formData, setFormData] = useState<FormData | null>(null);
   const [transformedData, setTransformedData] = useState<TransformedData | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     // Recupera los datos del formulario almacenados en sessionStorage al cargar el componente
@@ -44,6 +46,7 @@ const Summary = () => {
       const parsedFormData = JSON.parse(storedFormData);
       setFormData(parsedFormData);
       setTransformedData(transformData(parsedFormData));
+      setIsModalOpen(true);
     }
   }, []);
 
@@ -51,7 +54,7 @@ const Summary = () => {
   const transformData = (data: FormData): TransformedData => {
     return {
       status: "success",
-      message: "Data received successfully",
+      message: "Datos recibidos exitosamente",
       data: {
         full_name: data.fullName || "",
         email: data.email || "",
@@ -87,6 +90,10 @@ const Summary = () => {
   // Renderiza los datos transformados en una cuadrícula
   return (
     <div className="container mx-auto p-4 grid grid-cols-2 gap-4">
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <h2>{transformedData.message}</h2>
+        <button onClick={() => setIsModalOpen(false)}>Cerrar</button>
+      </Modal>
       <h2 className="text-2xl font-bold mb-4 col-span-2">Resumen del Formulario</h2>
       <div>
         <label className="font-semibold">Nombre Completo:</label>
