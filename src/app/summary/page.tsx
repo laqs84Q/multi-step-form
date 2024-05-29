@@ -6,15 +6,18 @@ const Summary = () => {
   const [formData, setFormData] = useState<FormData | null>(null);
 
   useEffect(() => {
+    // Recupera los datos del formulario almacenados en sessionStorage al cargar el componente
     const storedFormData = sessionStorage.getItem("formData");
     if (storedFormData) {
       setFormData(JSON.parse(storedFormData));
     }
   }, []);
 
+  // Muestra un mensaje de carga si no se han cargado los datos del formulario
   if (!formData)
     return <div className="container mx-auto p-4">Cargando...</div>;
 
+  // Renderiza los datos del formulario en una cuadrícula
   return (
     <div className="container-grid mx-auto p-4 grid grid-cols-2 gap-4">
       <h2 className="text-2xl font-bold mb-4 col-span-2">
