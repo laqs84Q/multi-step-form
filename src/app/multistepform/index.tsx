@@ -32,6 +32,7 @@ const MultiStepForm = () => {
     termsAccepted: false,
   });
   const [step, setStep] = useState(1);
+  const [loading, setLoading] = useState(false); // Estado para el loading
   const router = useRouter(); // Usa 'next/navigation'
 
   const handleNextStep = () => {
@@ -49,6 +50,7 @@ const MultiStepForm = () => {
         : "https://run.mocky.io/v3/e1724715-51d4-4ed2-b20f-cd3c59659e47";
 
     try {
+      setLoading(true); // Activar el loading
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -65,10 +67,21 @@ const MultiStepForm = () => {
       }
     } catch (error) {
       alert("Error al enviar el formulario");
+    } finally {
+      setLoading(false); // Desactivar el loading independientemente del resultado
     }
   };
 
   const renderStep = () => {
+    // Renderizar el loading si está activo
+    if (loading) {
+      return (
+        <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
+          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+        </div>
+      );
+    }
+
     switch (step) {
       case 1:
         return (
