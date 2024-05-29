@@ -36,7 +36,8 @@ type TransformedData = {
 
 const Summary = () => {
   const [formData, setFormData] = useState<FormData | null>(null);
-  const [transformedData, setTransformedData] = useState<TransformedData | null>(null);
+  const [transformedData, setTransformedData] =
+    useState<TransformedData | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
@@ -64,22 +65,28 @@ const Summary = () => {
         postal_code: data.postalCode || "",
         country: data.country || "",
         username: data.username || "",
-        password: "********",  // Mascara por seguridad
-        confirm_password: "********",  // Mascara por seguridad
+        password: "********", // Mascara por seguridad
+        confirm_password: "********", // Mascara por seguridad
         profile_type: data.userProfile || "",
-        personal_info: data.userProfile === "Personal" ? {
-          date_of_birth: data.dateOfBirth || "",
-          gender: data.gender || ""
-        } : null,
-        business_info: data.userProfile === "Business" ? {
-          company_name: data.companyName,
-          company_size: data.companySize,
-          role_in_company: data.roleInCompany
-        } : null,
+        personal_info:
+          data.userProfile === "Personal"
+            ? {
+                date_of_birth: data.dateOfBirth || "",
+                gender: data.gender || "",
+              }
+            : null,
+        business_info:
+          data.userProfile === "Business"
+            ? {
+                company_name: data.companyName,
+                company_size: data.companySize,
+                role_in_company: data.roleInCompany,
+              }
+            : null,
         notifications: data.receiveNotifications || false,
         how_heard: data.referralSource || "",
-        terms_agreed: data.termsAccepted || false
-      }
+        terms_agreed: data.termsAccepted || false,
+      },
     };
   };
 
@@ -94,7 +101,9 @@ const Summary = () => {
         <h2>{transformedData.message}</h2>
         <button onClick={() => setIsModalOpen(false)}>Cerrar</button>
       </Modal>
-      <h2 className="text-2xl font-bold mb-4 col-span-2">Resumen del Formulario</h2>
+      <h2 className="text-2xl font-bold mb-4 col-span-2">
+        Resumen del Formulario
+      </h2>
       <div>
         <label className="font-semibold">Nombre Completo:</label>
         <p>{transformedData.data.full_name}</p>
@@ -160,15 +169,21 @@ const Summary = () => {
         </>
       )}
       <div>
-        <label className="font-semibold">¿Desea recibir notificaciones por correo electrónico?</label>
+        <label className="font-semibold">
+          ¿Desea recibir notificaciones por correo electrónico?
+        </label>
         <p>{transformedData.data.notifications ? "Sí" : "No"}</p>
       </div>
       <div>
-        <label className="font-semibold">¿Cómo se enteró de nuestro servicio?</label>
+        <label className="font-semibold">
+          ¿Cómo se enteró de nuestro servicio?
+        </label>
         <p>{transformedData.data.how_heard}</p>
       </div>
       <div>
-        <label className="font-semibold">Acepto los términos y condiciones:</label>
+        <label className="font-semibold">
+          Acepto los términos y condiciones:
+        </label>
         <p>{transformedData.data.terms_agreed ? "Sí" : "No"}</p>
       </div>
     </div>

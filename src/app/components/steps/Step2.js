@@ -8,7 +8,7 @@ const Step2 = ({
 }) => {
   // Estado para almacenar los errores de validación
   const [errors, setErrors] = useState({});
-  
+
   // Estado para almacenar la lista de países y si se está cargando
   const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(true);
